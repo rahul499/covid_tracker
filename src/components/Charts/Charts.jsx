@@ -12,6 +12,7 @@ const Charts = ({ data: { confirmed, recovered, deaths }, country }) => {
             setDailyData(await fetchDailyData());
         }
      fetchAPI();
+     console.log(fetchAPI);
     },[]);
 
 const barChart = (
