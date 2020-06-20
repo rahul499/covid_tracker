@@ -1,41 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-import { Cards, Charts, Countrypicker } from './components';
-import styles from './App.module.css';
-import { fetchData } from './api';
-import image from './images/image.png';
+import { Home, Error, Indian } from './components';
 
-class App extends React.Component {
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-state = {
-  data: {},
-  country: ''
-}
+class App extends Component{
+	render(){
+		return(
+          <BrowserRouter>
+          <Switch>
+             <Route path="/" component= { Home } exact />
+             <Route path="/indian" component= { Indian } exact />
+             <Route component= { Error } />
+          </Switch>
+          </BrowserRouter>
 
-async componentDidMount() {
-const fetchedData = await fetchData();
 
-this.setState({ data: fetchedData });
-}
-
-handleCountryChange = async (country) => {
-    const data = await fetchData(country);
-
-    this.setState({ data, country: country });
-}
-
-render(){
-
-return(
-<div className = {styles.container} >
- <img className={styles.image} src={image} alt="COVID-19" />
-<Cards data = {this.state.data} />
-<Countrypicker handleCountryChange={this.handleCountryChange} />
-<Charts data = {this.state.data} country={this.state.country}/>
-
-</div>
-   )
-}
+			);
+	}
 }
 
 export default App;
